@@ -1,0 +1,6 @@
+export { BrowseProjectsSection } from '@/features/landing/sections/BrowseProjectsSection'
+export { ComingLaterSection } from '@/features/landing/sections/ComingLaterSection'
+export { FeaturedBuildsSection } from '@/features/landing/sections/FeaturedBuildsSection'
+export { HeroSection } from '@/features/landing/sections/HeroSection'
+export { LandingFooter } from '@/features/landing/sections/LandingFooter'
+export { SubmitProjectSection } from '@/features/landing/sections/SubmitProjectSection'

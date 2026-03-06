@@ -1,5 +1,6 @@
 import { ProjectGrid } from './components/ProjectGrid'
 import { Section } from './components/Section'
+import { WorkspacePreview } from './components/WorkspacePreview'
 import { browseProjects, featuredProjects } from './data/projects'
 
 function App() {
@@ -78,7 +79,9 @@ function App() {
               title="Coming Later"
               description="ReactStart is exploring ways to instantly open React projects in a browser workspace for learning and contribution."
               className="rounded-2xl border border-dashed border-slate-200/80 bg-white/50 p-7 sm:p-8"
-            />
+            >
+              <WorkspacePreview />
+            </Section>
           </div>
         </main>
 

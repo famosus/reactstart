@@ -1,5 +1,6 @@
 export { AdminLoginForm } from '@/features/admin/components/AdminLoginForm'
 export { AdminTopBar } from '@/features/admin/components/AdminTopBar'
+export { ProjectEditModal } from '@/features/admin/components/ProjectEditModal'
 export { SubmissionFilters } from '@/features/admin/components/SubmissionFilters'
 export { SubmissionReviewList } from '@/features/admin/components/SubmissionReviewList'
 export { SubmissionStatsGrid } from '@/features/admin/components/SubmissionStatsGrid'

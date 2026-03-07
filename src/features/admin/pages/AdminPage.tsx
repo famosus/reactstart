@@ -1,11 +1,19 @@
-import { AdminLoginForm, AdminTopBar, SubmissionFilters, SubmissionReviewList, SubmissionStatsGrid } from '@/features/admin/components'
-import { useAdminSession, useSubmissionReview } from '@/features/admin/hooks'
+import {
+  AdminLoginForm,
+  AdminTopBar,
+  ProjectEditModal,
+  SubmissionFilters,
+  SubmissionReviewList,
+  SubmissionStatsGrid,
+} from '@/features/admin/components'
+import { useAdminSession, useProjectEditor, useSubmissionReview } from '@/features/admin/hooks'
 
 export function AdminPage() {
   const { status, session, error, isSubmitting, isAuthenticated, signIn, signOut, refresh } =
     useAdminSession()
 
   const review = useSubmissionReview(isAuthenticated)
+  const projectEditor = useProjectEditor({ onSaved: review.refresh })
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-50 text-slate-900">
@@ -72,12 +80,26 @@ export function AdminPage() {
               isLoading={review.isLoading}
               error={review.error}
               activeSubmissionId={review.activeSubmissionId}
+              activeEditSubmissionId={projectEditor.activeSubmissionId}
               onRetry={review.refresh}
               onStatusChange={review.changeStatus}
+              onEditProject={projectEditor.openEditor}
             />
           </section>
         ) : null}
       </main>
+
+      <ProjectEditModal
+        isOpen={projectEditor.isOpen}
+        isLoading={projectEditor.isLoading}
+        isSaving={projectEditor.isSaving}
+        error={projectEditor.error}
+        form={projectEditor.form}
+        onClose={projectEditor.closeEditor}
+        onSave={projectEditor.saveEditor}
+        onFieldChange={projectEditor.updateField}
+        onFeaturedChange={projectEditor.setFeatured}
+      />
     </div>
   )
 }

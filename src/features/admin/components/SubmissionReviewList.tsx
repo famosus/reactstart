@@ -10,8 +10,10 @@ type SubmissionReviewListProps = {
   isLoading: boolean
   error: string | null
   activeSubmissionId: string | null
+  activeEditSubmissionId: string | null
   onRetry: () => Promise<void>
   onStatusChange: (submissionId: string, status: SubmissionStatus) => Promise<void>
+  onEditProject: (submission: SubmissionReview) => Promise<void>
 }
 
 export function SubmissionReviewList({
@@ -19,8 +21,10 @@ export function SubmissionReviewList({
   isLoading,
   error,
   activeSubmissionId,
+  activeEditSubmissionId,
   onRetry,
   onStatusChange,
+  onEditProject,
 }: SubmissionReviewListProps) {
   if (isLoading) {
     return (
@@ -57,6 +61,7 @@ export function SubmissionReviewList({
     <section className="space-y-4">
       {submissions.map((submission) => {
         const isUpdating = activeSubmissionId === submission.id
+        const isOpeningEditor = activeEditSubmissionId === submission.id
         const repositoryLabel = submission.repository
           ? `${submission.repository.owner}/${submission.repository.repoName}`
           : null
@@ -114,6 +119,18 @@ export function SubmissionReviewList({
             </div>
 
             <div className="mt-5 flex flex-wrap gap-2">
+              {submission.status === 'approved' ? (
+                <button
+                  type="button"
+                  disabled={isUpdating || isOpeningEditor || !submission.projectId}
+                  onClick={() => void onEditProject(submission)}
+                  title={submission.projectId ? undefined : 'Project link missing. Re-approve to generate it.'}
+                  className="rounded-full border border-slate-300 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {isOpeningEditor ? 'Opening...' : 'Edit Project'}
+                </button>
+              ) : null}
+
               <button
                 type="button"
                 disabled={isUpdating || submission.status === 'approved'}

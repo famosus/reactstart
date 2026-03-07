@@ -6,10 +6,12 @@ import { Section } from '@/components/ui/Section'
 import { TagBadge } from '@/components/ui/TagBadge'
 import { getFeaturedProjects, getFeaturedTags } from '@/lib/projects'
 import type { Project } from '@/types/project'
+import { useProjectRepoStats } from '@/hooks/useProjectRepoStats'
 
 export function FeaturedProjectsSection() {
   const [projects, setProjects] = useState<Project[]>([])
   const [status, setStatus] = useState<'loading' | 'success' | 'empty' | 'error'>('loading')
+  const { repoStatsByProjectId } = useProjectRepoStats(projects)
 
   useEffect(() => {
     let active = true
@@ -59,7 +61,9 @@ export function FeaturedProjectsSection() {
         </div>
       ) : null}
 
-      {status === 'success' ? <ProjectGrid projects={projects} columns={2} /> : null}
+      {status === 'success' ? (
+        <ProjectGrid projects={projects} columns={2} repoStatsByProjectId={repoStatsByProjectId} />
+      ) : null}
 
       {status === 'empty' ? (
         <p className="text-sm text-slate-500">No featured React builds yet.</p>

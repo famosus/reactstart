@@ -1,14 +1,23 @@
+import { GitFork, Star } from 'lucide-react'
+
 import { TagBadge } from '@/components/ui/TagBadge'
+import type { GitHubRepoStats } from '@/lib/repositoryStats'
 import type { Project } from '@/types/project'
 
 type ProjectCardProps = {
   project: Project
   demoLabel?: string
+  repoStats?: GitHubRepoStats | null
+}
+
+function formatCount(value: number): string {
+  return value.toLocaleString()
 }
 
 export function ProjectCard({
   project,
   demoLabel = 'Live Demo',
+  repoStats = null,
 }: ProjectCardProps) {
   return (
     <article className="flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white/70 p-6 shadow-sm shadow-slate-200/50 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/70">
@@ -32,6 +41,20 @@ export function ProjectCard({
           ))}
         </div>
       </div>
+
+      {repoStats ? (
+        <div className="mt-4 flex flex-wrap items-center gap-2.5 text-[11px] text-slate-500">
+          <span className="inline-flex items-center gap-1.5">
+            <Star className="h-3.5 w-3.5" strokeWidth={1.75} />
+            <span>{formatCount(repoStats.stars)} stars</span>
+          </span>
+          <span aria-hidden="true" className="h-3 w-px bg-slate-200" />
+          <span className="inline-flex items-center gap-1.5">
+            <GitFork className="h-3.5 w-3.5" strokeWidth={1.75} />
+            <span>{formatCount(repoStats.forks)} forks</span>
+          </span>
+        </div>
+      ) : null}
 
       <div className="mt-6 flex flex-wrap gap-3">
         {project.demoUrl ? (

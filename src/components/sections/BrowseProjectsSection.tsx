@@ -5,10 +5,12 @@ import { ProjectGrid } from '@/components/ui/ProjectGrid'
 import { Section } from '@/components/ui/Section'
 import { getPublishedProjects } from '@/lib/projects'
 import type { Project } from '@/types/project'
+import { useProjectRepoStats } from '@/hooks/useProjectRepoStats'
 
 export function BrowseProjectsSection() {
   const [projects, setProjects] = useState<Project[]>([])
   const [status, setStatus] = useState<'loading' | 'success' | 'empty' | 'error'>('loading')
+  const { repoStatsByProjectId } = useProjectRepoStats(projects)
 
   useEffect(() => {
     let active = true
@@ -52,7 +54,14 @@ export function BrowseProjectsSection() {
         </div>
       ) : null}
 
-      {status === 'success' ? <ProjectGrid projects={projects} columns={3} demoLabel="Demo" /> : null}
+      {status === 'success' ? (
+        <ProjectGrid
+          projects={projects}
+          columns={3}
+          demoLabel="Demo"
+          repoStatsByProjectId={repoStatsByProjectId}
+        />
+      ) : null}
 
       {status === 'empty' ? (
         <p className="text-sm text-slate-500">No React projects have been added yet.</p>

@@ -1,3 +1,5 @@
+export { LandingPage } from '@/features/landing/pages'
+
 export { Footer as LandingFooter } from '@/components/layout/Footer'
 export { BrowseProjectsSection } from '@/components/sections/BrowseProjectsSection'
 export { ComingLaterSection } from '@/components/sections/ComingLaterSection'

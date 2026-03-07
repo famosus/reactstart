@@ -1,1 +1,1 @@
-export { Section } from '@/shared/ui/Section'
+export { Section } from '@/components/ui/Section'

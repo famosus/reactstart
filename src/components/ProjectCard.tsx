@@ -1,1 +1,1 @@
-export { ProjectCard } from '@/features/landing/components/ProjectCard'
+export { ProjectCard } from '@/components/ui/ProjectCard'

@@ -1,1 +1,1 @@
-export { WorkspacePreview } from '@/features/landing/components/WorkspacePreview'
+export { WorkspacePreview } from '@/components/ui/WorkspacePreview'

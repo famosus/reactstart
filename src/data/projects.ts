@@ -1,1 +1,1 @@
-export * from '@/features/landing/data/projects'
+export * from '@/data/mockProjects'

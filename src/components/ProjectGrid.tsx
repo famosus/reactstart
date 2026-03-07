@@ -1,1 +1,1 @@
-export { ProjectGrid } from '@/features/landing/components/ProjectGrid'
+export { ProjectGrid } from '@/components/ui/ProjectGrid'

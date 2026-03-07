@@ -7,10 +7,11 @@ type ProjectGridProps = {
   columns?: 2 | 3
   demoLabel?: string
   repoStatsByProjectId?: Record<string, GitHubRepoStats | null>
+  thumbnailMode?: 'standard' | 'expanded'
 }
 
 const gridColumns: Record<NonNullable<ProjectGridProps['columns']>, string> = {
-  2: 'sm:grid-cols-2',
+  2: 'md:grid-cols-2',
   3: 'sm:grid-cols-2 lg:grid-cols-3',
 }
 
@@ -19,6 +20,7 @@ export function ProjectGrid({
   columns = 3,
   demoLabel,
   repoStatsByProjectId,
+  thumbnailMode = 'standard',
 }: ProjectGridProps) {
   return (
     <div className={`grid gap-5 ${gridColumns[columns]}`}>
@@ -28,6 +30,7 @@ export function ProjectGrid({
           project={project}
           demoLabel={demoLabel}
           repoStats={repoStatsByProjectId?.[project.id] ?? null}
+          thumbnailMode={thumbnailMode}
         />
       ))}
     </div>

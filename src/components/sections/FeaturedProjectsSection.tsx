@@ -62,7 +62,12 @@ export function FeaturedProjectsSection() {
       ) : null}
 
       {status === 'success' ? (
-        <ProjectGrid projects={projects} columns={2} repoStatsByProjectId={repoStatsByProjectId} />
+        <ProjectGrid
+          projects={projects}
+          columns={2}
+          repoStatsByProjectId={repoStatsByProjectId}
+          thumbnailMode="expanded"
+        />
       ) : null}
 
       {status === 'empty' ? (

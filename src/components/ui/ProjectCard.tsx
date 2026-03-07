@@ -4,20 +4,32 @@ import { TagBadge } from '@/components/ui/TagBadge'
 import type { GitHubRepoStats } from '@/lib/repositoryStats'
 import type { Project } from '@/types/project'
 
+type ThumbnailMode = 'standard' | 'expanded'
+
 type ProjectCardProps = {
   project: Project
   demoLabel?: string
   repoStats?: GitHubRepoStats | null
+  thumbnailMode?: ThumbnailMode
 }
 
 function formatCount(value: number): string {
   return value.toLocaleString()
 }
 
+function getThumbnailClasses(mode: ThumbnailMode): string {
+  if (mode === 'expanded') {
+    return 'h-52 w-full object-contain bg-white p-2 sm:h-56 md:h-60'
+  }
+
+  return 'h-36 w-full object-cover'
+}
+
 export function ProjectCard({
   project,
   demoLabel = 'Live Demo',
   repoStats = null,
+  thumbnailMode = 'standard',
 }: ProjectCardProps) {
   return (
     <article className="flex h-full flex-col rounded-2xl border border-slate-200/80 bg-white/70 p-6 shadow-sm shadow-slate-200/50 transition hover:-translate-y-0.5 hover:shadow-md hover:shadow-slate-200/70">
@@ -27,7 +39,7 @@ export function ProjectCard({
             src={project.imageUrl}
             alt={`${project.name} thumbnail`}
             loading="lazy"
-            className="h-36 w-full object-cover"
+            className={getThumbnailClasses(thumbnailMode)}
           />
         </div>
       ) : null}

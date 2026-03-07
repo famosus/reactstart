@@ -15,7 +15,6 @@ export const supabase: SupabaseClient | null = isSupabaseConfigured
       global: {
         headers: {
           apikey: supabasePublicKey,
-          Authorization: `Bearer ${supabasePublicKey}`,
         },
       },
     })
